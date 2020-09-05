@@ -1,44 +1,68 @@
 <template>
   <div class="login">
-    <div class="login-input">
-      <input v-model="loginForm.username" type="text" name="username" placeholder="请输入账号">
-    </div>
-    <div class="login-input">
-      <input v-model="loginForm.password" type="text" name="password" placeholder="请输入密码">
-    </div>
-    <div class="login-btn">
-      <button @click="login()">登录</button>
-    </div>
+    登录
+    <el-form ref="loginForm" :model="loginForm" status-icon :rules="loginRules" label-width="100px">
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="loginForm.username" type="text" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="确认密码" prop="password">
+        <el-input v-model="loginForm.password" type="password" autocomplete="off" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" :loading="loading" @click="login()">登录</el-button>
+        <el-button @click="resetForm()">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 import { isEmpty } from '@/utils/validate'
-
 export default {
-  name: 'Login',
   data() {
+    const validateUsername = (rule, value, callback) => {
+      if (isEmpty(value)) {
+        callback(new Error('请输入用户名！'))
+      } else {
+        callback()
+      }
+    }
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error('请输入大于6位的密码！'))
+      } else {
+        callback()
+      }
+    }
     return {
+      loading: false,
       loginForm: {
         username: '',
         password: ''
+      },
+      loginRules: {
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       }
     }
   },
   methods: {
     login() {
-      if (isEmpty(this.loginForm.username)) {
-        alert('请输入账号')
-        return false
-      }
-      if (isEmpty(this.loginForm.password)) {
-        alert('请输入密码')
-        return false
-      }
-      this.$store.dispatch('user/login', this.loginForm).then(() => {
-        this.$router.push({ path: this.redirect || '/' })
-      }).catch(() => {
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        }
       })
+    },
+    resetForm() {
+      this.loginForm.username = ''
+      this.loginForm.password = ''
     }
   }
 }
@@ -46,14 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 .login {
-  margin-top: 10px;
-
-  .login-input {
-    margin-bottom: 10px;
-  }
-
-  .login-btn {
-    color: #000;
-  }
+  margin: 10px;
+  background-color: #fbfbfb;
 }
 </style>

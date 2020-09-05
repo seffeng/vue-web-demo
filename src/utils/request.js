@@ -1,7 +1,9 @@
 import axios from 'axios'
 import store from '@/store'
+import { MessageBox, Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
 import { debug } from '@/utils'
+import { isEmpty } from '@/utils/validate'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -50,17 +52,22 @@ service.interceptors.response.use(
       if (res.code === 401) {
         // to re-login
 
-        // 使用消息组件替换，如：Element-UI Message MessageBox.confirm('')
-        debug('此处代码可能需要修改！替换友好提示！')
-        if (confirm('您的登录已超时，请重新登录？')) {
+        // to re-login
+        MessageBox.confirm('您的登录已超时，请重新登录？', '退出提示', {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
           store.dispatch('user/resetToken').then(() => {
             location.reload()
           })
-        }
+        })
       } else {
-        // 使用消息组件替换，如：Element-UI Message.error(error || 'Has Error')
-        debug('此处代码可能需要修改！替换友好提示！')
-        debug(res.message)
+        Message({
+          message: isEmpty(res.message) ? '操作错误！' : res.message,
+          type: 'error',
+          duration: 5 * 1000
+        })
       }
       return res
     } else {
@@ -75,9 +82,11 @@ service.interceptors.response.use(
       message = '数据验证错误！'
     }
 
-    // 使用消息组件替换，如：Element-UI Message.error(error || 'Has Error')
-    debug('此处代码可能需要修改！替换友好提示！')
-    debug(message)
+    Message({
+      message: message,
+      type: 'error',
+      duration: 5 * 1000
+    })
     return Promise.reject(error)
   }
 )
