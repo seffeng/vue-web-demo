@@ -1,4 +1,4 @@
-# vue-web-demo
+# vue-web-demo Quasar版本
 
 ## 安装[Project setup]
 ```

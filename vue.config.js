@@ -14,8 +14,8 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: '',
   indexPath: 'index.html',
-
   lintOnSave: process.env.NODE_ENV === 'development',
+
   devServer: {
     https: false,
     host: process.env.VUE_APP_DEV_HOST,
@@ -44,5 +44,16 @@ module.exports = {
         '@': resolve('src')
       }
     }
-  }
+  },
+
+  pluginOptions: {
+    quasar: {
+      importStrategy: 'kebab',
+      rtlSupport: false
+    }
+  },
+
+  transpileDependencies: [
+    'quasar'
+  ]
 }

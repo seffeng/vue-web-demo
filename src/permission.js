@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import { getPageTitle, debug } from '@/utils'
+import { Notify } from 'quasar'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -42,8 +43,12 @@ router.beforeEach(async(to, from, next) => {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
 
-          // 使用消息组件替换，如：Element-UI Message.error(error || 'Has Error')
-          debug('此处代码可能需要修改！替换友好提示！', error || 'Has Error')
+          debug(error || 'Has Error')
+          Notify.create({
+            message: error || 'Has Error',
+            color: 'negative',
+            icon: 'warning'
+          })
 
           next(`/login?redirect=${to.path}`)
           NProgress.done()
