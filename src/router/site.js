@@ -11,7 +11,7 @@ export default [
     },
     children: [
       {
-        path: '/',
+        path: 'site',
         name: 'Home',
         component: () => import('@/views/site/index'),
         meta: {
@@ -24,7 +24,7 @@ export default [
     ]
   },
   {
-    path: '/login',
+    path: 'login',
     name: 'Login',
     hidden: false,
     meta: {
