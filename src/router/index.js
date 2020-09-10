@@ -7,7 +7,7 @@ import routesError from './error'
 
 const tmpRoutes = []
 
-const routes = tmpRoutes.concat(
+export const constantRoutes = tmpRoutes.concat(
   routesSite,
   routesError
 )
@@ -15,7 +15,7 @@ const routes = tmpRoutes.concat(
 const createRouter = () => new VueRouter({
   mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: routes
+  routes: constantRoutes
 })
 
 const router = createRouter()

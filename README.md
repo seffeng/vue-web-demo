@@ -37,9 +37,13 @@ npm run lint
 
 ```shell
 # 1、注意修改配置文件 .env.*
-# 2、请搜索“此处代码可能需要修改！”部分确定是否根据业务修改代码。
-# 3、路由配置属性 meta.requiresAuth:false 时代表不需要登录可访问（boolean false，非字符串）
-# 4、路由配置属性 meta.allow:true 时代表不受权限控制，可直接访问
+# 2、请搜索“此处代码可能需要修改！”部分确定是否根据业务修改代码
+# 3、路由配置属性 路由只支持2级，即只能有一个 children
+# 4、路由配置属性 meta.requiresAuth:false 时代表不需要登录可访问（boolean false，非字符串）
+# 5、路由配置属性 meta.allow:true 时代表不受权限控制，可直接访问
+# 6、路由配置属性 meta.separator:true 代表显示分割线
+# 7、路由配置属性 meta.hidden:true 代表隐藏该菜单
+# 8、布局设置 Header.vue,Footer.vue sidebar.leftVisiable 值应与 Sidebar*.vue visiable 一致
 ```
 
 ### 配置参考[Customize configuration]

@@ -1,12 +1,9 @@
 <template>
-  <q-footer elevated class="bg-grey-8 text-white">
+  <q-footer elevated class="bg-blue-8 text-white">
     <q-toolbar>
-      <q-btn dense flat round icon="menu" @click="showSidebarLeft" />
+      <q-btn flat round dense icon="menu" class="q-mr-sm" @click="showSidebarLeft" />
       <q-toolbar-title>
-        <q-avatar>
-          <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
-        </q-avatar>
-        Title
+        Footer
       </q-toolbar-title>
     </q-toolbar>
   </q-footer>
@@ -24,7 +21,9 @@ export default {
     }
   },
   created() {
-    this.showSidebarLeft()
+    bus.$on('sendLeftVisiable', val => {
+      this.sidebar.leftVisiable = val
+    })
   },
   methods: {
     showSidebarLeft() {

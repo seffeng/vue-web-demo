@@ -6,18 +6,18 @@
 
     <SidebarRight />
 
-    <q-page-container id="app">
-      <img alt="Vue logo" src="@/assets/logo.png">
+    <q-page-container>
       <router-view />
     </q-page-container>
 
     <Footer />
-    <!--<q-backtop color="warning" icon="keyboard_arrow_up" text="back to top" :right="20" :bottom="50" :z-index="1001" :round="true" />-->
+    <q-backtop />
 
   </q-layout>
 </template>
 
 <script>
+import { QBacktop } from 'q-backtop'
 import Header from '@/layout/components/Header.vue'
 import Footer from '@/layout/components/Footer.vue'
 import SidebarLeft from '@/layout/components/SidebarLeft.vue'
@@ -28,6 +28,7 @@ export default {
   components: {
     Header,
     Footer,
+    QBacktop,
     SidebarLeft,
     SidebarRight
   }

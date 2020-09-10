@@ -19,10 +19,8 @@ export default {
     }
   },
   created() {
-    console.log('created')
     bus.$on('showSidebarRight', val => {
-      console.log('created33')
-      this.visiable = !val
+      this.visiable = val
     })
   },
   mounted() {

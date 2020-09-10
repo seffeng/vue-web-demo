@@ -1,21 +1,36 @@
+import Layout from '@/layout/main.vue'
+
 export default [
   {
     path: '/',
-    name: 'Home',
-    component: resolve => require(['@/views/site/index'], resolve),
+    component: Layout,
     meta: {
-      title: '首页',
-      allow: true
-    }
+      title: 'Home',
+      subTitle: 'sub-title',
+      icon: 'home'
+    },
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: () => import('@/views/site/index'),
+        meta: {
+          title: '首页',
+          icon: 'home',
+          requiresAuth: false,
+          allow: true
+        }
+      }
+    ]
   },
   {
     path: '/login',
     name: 'Login',
+    hidden: false,
     meta: {
       title: '登录',
-      iconfont: '&#xe641;',
       requiresAuth: false
     },
-    component: resolve => require(['@/views/site/login'], resolve)
+    component: () => import('@/views/site/login')
   }
 ]
