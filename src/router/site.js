@@ -3,12 +3,14 @@ import Layout from '@/layout/main.vue'
 export default [
   {
     path: '/',
+    name: 'SiteIndex',
     component: Layout,
     meta: {
       title: 'Home',
       subTitle: 'sub-title',
       icon: 'home'
     },
+    redirect: 'site',
     children: [
       {
         path: 'site',
@@ -24,7 +26,7 @@ export default [
     ]
   },
   {
-    path: 'login',
+    path: '/login',
     name: 'Login',
     hidden: false,
     meta: {

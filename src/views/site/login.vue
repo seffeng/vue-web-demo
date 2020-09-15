@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="q-pa-md">
     <q-form
       ref="loginForm"
       class="q-gutter-md"
@@ -82,8 +82,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
-  margin-top: 10px;
-
-}
 </style>

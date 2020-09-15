@@ -4,6 +4,7 @@ export default [
   {
     path: '/',
     component: Layout,
+    name: 'ErrorIndex',
     meta: {
       title: '父菜单',
       icon: 'warning'

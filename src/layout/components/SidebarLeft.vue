@@ -1,5 +1,13 @@
 <template>
-  <q-drawer v-model="visiable" side="left" bordered @show="handleShow" @hide="handleHide">
+  <q-drawer
+    v-model="visiable"
+    side="left"
+    bordered
+    content-class="bg-grey-2"
+    :width="260"
+    @show="handleShow"
+    @hide="handleHide"
+  >
     <q-scroll-area class="fit">
       <q-list v-if="menuRoutes.length > 0">
         <template v-for="(menu, index) in menuRoutes">
@@ -50,7 +58,7 @@ export default {
   name: 'SidebarLeft',
   data() {
     return {
-      visiable: false,
+      visiable: true,
       menuRoutes: []
     }
   },

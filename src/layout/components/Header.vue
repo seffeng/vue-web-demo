@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       sidebar: {
-        leftVisiable: false,
+        leftVisiable: true,
         rightVisiable: false
       }
     }

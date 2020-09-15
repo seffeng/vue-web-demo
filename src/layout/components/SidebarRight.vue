@@ -1,11 +1,13 @@
 <template>
   <q-drawer v-model="visiable" side="right" bordered>
     <!-- drawer content -->
-    <p>右侧内容</p>
-    <p>右侧内容</p>
-    <p>右侧内容</p>
-    <p>右侧内容</p>
-    <p>右侧内容</p>
+    <div class="q-pa-md">
+      <p>右侧内容</p>
+      <p>右侧内容</p>
+      <p>右侧内容</p>
+      <p>右侧内容</p>
+      <p>右侧内容</p>
+    </div>
   </q-drawer>
 </template>
 
