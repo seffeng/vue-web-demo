@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 import { debug } from '@/utils'
-import { Notify } from 'quasar'
+import { Notify, Dialog } from 'quasar'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -50,20 +50,19 @@ service.interceptors.response.use(
       // 401: 未登录;
       if (res.code === 401) {
         // to re-login
-
-        Notify.create({
+        Dialog.create({
+          persistent: true,
+          title: '登录超时',
           message: '您的登录已超时，请重新登录？',
-          color: 'info',
-          position: 'center',
-          icon: 'warning',
-          actions: [
-            { label: '重新登录', color: 'blue', handler: () => {
-              store.dispatch('user/resetToken').then(() => {
-                location.reload()
-              })
-            } },
-            { label: '取消', color: 'white', handler: () => { /* ... */ } }
-          ]
+          ok: {
+            color: 'primary',
+            label: '重新登录'
+          },
+          cancel: '取消'
+        }).onOk(() => {
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
         })
       } else {
         debug(res.message)

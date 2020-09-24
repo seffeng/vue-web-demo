@@ -1,16 +1,13 @@
 import router from './router'
 import store from './store'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
+import { LoadingBar } from 'quasar'
 import { getToken } from '@/utils/auth' // get token from cookie
 import { getPageTitle, debug } from '@/utils'
 import { Notify } from 'quasar'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
-
 router.beforeEach(async(to, from, next) => {
   // start progress bar
-  NProgress.start()
+  LoadingBar.start()
 
   // set page title
   document.title = getPageTitle(to.meta.title)
@@ -22,7 +19,7 @@ router.beforeEach(async(to, from, next) => {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
       next({ name: 'Home' })
-      NProgress.done()
+      LoadingBar.stop()
     } else {
       // 此处代码可能需要修改！改为是否有权限！
       const allow = to.meta.allow || store.getters.name
@@ -37,7 +34,7 @@ router.beforeEach(async(to, from, next) => {
             next()
           } else {
             next({ name: 'NotAuth' })
-            NProgress.done()
+            LoadingBar.stop()
           }
         } catch (error) {
           // remove token and go to login page to re-login
@@ -51,7 +48,7 @@ router.beforeEach(async(to, from, next) => {
           })
 
           next(`/login?redirect=${to.path}`)
-          NProgress.done()
+          LoadingBar.stop()
         }
       }
     }
@@ -63,12 +60,12 @@ router.beforeEach(async(to, from, next) => {
     } else {
       // other pages that do not have permission to access are redirected to the login page.
       next(`/login?redirect=${to.path}`)
-      NProgress.done()
+      LoadingBar.stop()
     }
   }
 })
 
 router.afterEach(() => {
   // finish progress bar
-  NProgress.done()
+  LoadingBar.stop()
 })

@@ -46,6 +46,13 @@
           </div>
         </template>
       </q-list>
+      <template>
+        <q-input v-model="search" placeholder="search" clearable>
+          <template v-slot:prepend>
+            <q-btn round dense flat icon="search" @click="handleSearch" />
+          </template>
+        </q-input>
+      </template>
     </q-scroll-area>
   </q-drawer>
 </template>
@@ -53,11 +60,13 @@
 <script>
 import bus from '@/utils/bus'
 import { constantRoutes } from '@/router'
+import { debug } from '@/utils'
 
 export default {
   name: 'SidebarLeft',
   data() {
     return {
+      search: '',
       visiable: true,
       menuRoutes: []
     }
@@ -69,6 +78,9 @@ export default {
     this.setMenu()
   },
   methods: {
+    handleSearch() {
+      debug(this.search)
+    },
     handleHide() {
       bus.$emit('sendLeftVisiable', this.visiable)
     },

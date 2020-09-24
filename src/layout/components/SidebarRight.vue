@@ -1,5 +1,12 @@
 <template>
-  <q-drawer v-model="visiable" side="right" bordered>
+  <q-drawer
+    v-model="visiable"
+    side="right"
+    bordered
+    :width="260"
+    @show="handleShow"
+    @hide="handleHide"
+  >
     <!-- drawer content -->
     <div class="q-pa-md">
       <p>右侧内容</p>
@@ -26,6 +33,14 @@ export default {
     })
   },
   mounted() {
+  },
+  methods: {
+    handleHide() {
+      bus.$emit('sendRightVisiable', this.visiable)
+    },
+    handleShow() {
+      bus.$emit('sendRightVisiable', this.visiable)
+    }
   }
 }
 </script>
