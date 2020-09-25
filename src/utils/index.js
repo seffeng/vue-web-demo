@@ -183,10 +183,62 @@ export function debug(...str) {
   }
 }
 
+/**
+ * 获取标题
+ * @param {string} pageTitle
+ */
 export function getPageTitle(pageTitle) {
   const title = defaultSettings.title
   if (pageTitle) {
     return `${pageTitle} - ${title}`
   }
   return `${title}`
+}
+
+/**
+ * 菜单处理
+ * @param {object} router
+ */
+export function getMenuItems(router) {
+  const menuItems = []
+  for (const i in router) {
+    const children = router[i].children
+    if (children) {
+      if (children.length > 1) {
+        const child = []
+        for (const j in children) {
+          child.push({
+            name: children[j].name,
+            path: children[j].path,
+            meta: children[j].meta,
+            hidden: children[j].hidden && children[j].hidden === true
+          })
+        }
+        menuItems.push({
+          name: router[i].name,
+          path: router[i].path,
+          meta: router[i].meta,
+          hidden: router[i].hidden && router[i].hidden === true,
+          children: child
+        })
+      } else {
+        for (const j in children) {
+          menuItems.push({
+            name: children[j].name,
+            path: children[j].path,
+            meta: children[j].meta,
+            hidden: children[j].hidden && children[j].hidden === true
+          })
+        }
+      }
+    } else {
+      menuItems.push({
+        name: router[i].name,
+        path: router[i].path,
+        meta: router[i].meta,
+        hidden: router[i].hidden
+      })
+    }
+  }
+  return menuItems
 }
