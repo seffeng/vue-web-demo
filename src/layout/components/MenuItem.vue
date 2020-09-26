@@ -1,12 +1,12 @@
 <template>
-  <q-tabs v-if="menuRoutes.length > 0" v-model="menuActive" :vertical="menuVertical" inline-label shrink :active-bg-color="activeBgColor">
+  <q-tabs v-if="menuRoutes.length > 0" :value="menuActive" :vertical="menuVertical" inline-label shrink :active-bg-color="activeBgColor">
     <template v-for="(menu, index) in menuRoutes">
-      <q-tab v-if="menu.children" :key="'c-' + index" :name="menu.name">
+      <q-tab v-if="menu.children" :key="'c-' + index" :name="menu.name" class="q-pa-none">
         <q-btn-dropdown auto-close stretch flat>
           <template v-slot:label>
             <div class="row no-wrap">
               <q-icon v-if="menuIcon && menu.meta.icon" :name="menu.meta.icon" />
-              <div v-if="menu.meta && menu.meta.title" class="text-center">
+              <div v-if="menu.meta && menu.meta.title">
                 {{ menu.meta.title }}
               </div>
             </div>
@@ -107,7 +107,7 @@ export default {
   },
   created() {
     this.menuRoutes = getMenuItems(constantRoutes)
-    this.menuActive = !isNull(this.$route.meta) && !isEmpty(this.$route.meta.tab) ? this.$route.meta.tab : this.$route.name
+    this.menuActive = !isNull(this.$route.meta) && !isEmpty(this.$route.meta.tag) ? this.$route.meta.tag : this.$route.name
   },
   methods: {
     handleSearch() {
@@ -118,5 +118,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

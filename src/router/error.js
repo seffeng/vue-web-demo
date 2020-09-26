@@ -28,7 +28,7 @@ export default [
         component: () => import('@/views/error/not-found'),
         meta: {
           title: '页面不存在',
-          icon: 'menu',
+          tag: 'ErrorIndex',
           requiresAuth: false,
           allow: true
         }
