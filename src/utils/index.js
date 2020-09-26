@@ -2,6 +2,7 @@
  * by https://github.com/PanJiaChen/vue-admin-template
  */
 import { getToken } from '@/utils/auth'
+import { isNull, isExternal } from '@/utils/validate'
 import defaultSettings from '@/settings'
 
 /**
@@ -202,41 +203,43 @@ export function getPageTitle(pageTitle) {
 export function getMenuItems(router) {
   const menuItems = []
   for (const i in router) {
-    const children = router[i].children
-    if (children) {
-      if (children.length > 1) {
-        const child = []
-        for (const j in children) {
+    if (!isNull(router[i].children) && router[i].children.length > 0) {
+      const children = router[i].children
+      const child = []
+      for (const j in children) {
+        if (isNull(children[j].hidden) || children[j].hidden === false) {
           child.push({
             name: children[j].name,
             path: children[j].path,
-            meta: children[j].meta,
-            hidden: children[j].hidden && children[j].hidden === true
-          })
-        }
-        menuItems.push({
-          name: router[i].name,
-          path: router[i].path,
-          meta: router[i].meta,
-          hidden: router[i].hidden && router[i].hidden === true,
-          children: child
-        })
-      } else {
-        for (const j in children) {
-          menuItems.push({
-            name: children[j].name,
-            path: children[j].path,
-            meta: children[j].meta,
-            hidden: children[j].hidden && children[j].hidden === true
+            external: isExternal(children[j].path),
+            meta: children[j].meta
           })
         }
       }
-    } else {
+      if (child.length > 1) {
+        menuItems.push({
+          name: router[i].name,
+          path: router[i].path,
+          external: isExternal(router[i].path),
+          meta: router[i].meta,
+          children: child
+        })
+      } else {
+        for (const j in child) {
+          menuItems.push({
+            name: child[j].name,
+            path: child[j].path,
+            external: isExternal(child[j].path),
+            meta: child[j].meta
+          })
+        }
+      }
+    } else if (isNull(router[i].hidden) || router[i].hidden === false) {
       menuItems.push({
         name: router[i].name,
         path: router[i].path,
-        meta: router[i].meta,
-        hidden: router[i].hidden
+        external: isExternal(router[i].path),
+        meta: router[i].meta
       })
     }
   }

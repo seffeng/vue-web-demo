@@ -8,7 +8,7 @@
     @show="handleShow"
     @hide="handleHide"
   >
-    <MenuItem :menu-vertical="true" active-bg-color="blue-2" :menu-icon="true" :input-round="false" :input-outlined="false" />
+    <MenuItem :menu-vertical="true" active-bg-color="blue-2" :menu-icon="true" :input-outlined="false" />
   </q-drawer>
 </template>
 

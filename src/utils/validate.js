@@ -11,7 +11,15 @@ export function isExternal(path) {
  * @param {string} str
  */
 export function isEmpty(str) {
-  return str === undefined || str === null || (typeof (str) === 'string' && str.trim() === '')
+  return isNull(str) || (typeof (str) === 'string' && str.trim() === '')
+}
+
+/**
+ *
+ * @param {*} val
+ */
+export function isNull(val) {
+  return val === undefined || val === null
 }
 
 /**
