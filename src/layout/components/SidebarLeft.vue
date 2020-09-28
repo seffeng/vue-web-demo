@@ -8,13 +8,13 @@
     @show="handleShow"
     @hide="handleHide"
   >
-    <MenuItem :menu-vertical="true" menu-active-bg-color="blue-2" :menu-icon="true" :input-outlined="false" />
+    <MenuItem :menu-vertical="true" :input-rounded="false" :input-outlined="false" />
   </q-drawer>
 </template>
 
 <script>
 import bus from '@/utils/bus'
-import MenuItem from './MenuTop'
+import MenuItem from './MenuLeft'
 
 export default {
   name: 'SidebarLeft',

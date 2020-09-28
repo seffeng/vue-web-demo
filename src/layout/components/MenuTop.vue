@@ -11,7 +11,7 @@
   >
     <div v-for="(menu, index) in menuRoutes" :key="'p-' + index">
       <div v-if="menu.children">
-        <q-tab :name="menu.name">
+        <q-tab :name="menu.name" ripple>
           <template slot="default">
             <q-btn-dropdown
               align="left"
@@ -52,7 +52,7 @@
       </div>
 
       <div v-else>
-        <q-tab v-if="menu.external" :name="menu.name">
+        <q-tab v-if="menu.external" :name="menu.name" ripple>
           <template slot="default">
             <q-btn
               align="left"
@@ -69,7 +69,7 @@
           </template>
         </q-tab>
 
-        <q-route-tab v-else :name="menu.name" :to="{ name: menu.name }" exact>
+        <q-route-tab v-else :name="menu.name" :to="{ name: menu.name }" exact ripple>
           <template slot="default">
             <q-icon v-if="menuIcon && hasIcon(menu.meta.icon)" :name="menu.meta.icon" size="sm" left />
             <div>{{ menu.meta.title }}</div>

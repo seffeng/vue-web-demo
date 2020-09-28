@@ -1,50 +1,100 @@
 <template>
-  <q-list v-if="menuRoutes.length > 0">
-    <template v-for="(menu, index) in menuRoutes">
-      <div v-if="menu.children" :key="'c-' + index">
-        <q-expansion-item
-          v-if="!menu.hidden"
-          :content-inset-level="0.5"
-          :icon="menu.meta && menu.meta.icon ? menu.meta.icon : ''"
-          :label="menu.meta && menu.meta.title ? menu.meta.title : ''"
-          :caption="menu.meta && menu.meta.subTitle ? menu.meta.subTitle : ''"
-          default-opened
-        >
-          <div v-for="(child, k) in menu.children" :key="k">
-            <q-item v-if="!child.hidden" :to="child.path">
-              <q-item-section v-if="child.meta.icon" avatar>
-                <q-icon :name="child.meta.icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ child.meta.title }}
-              </q-item-section>
-            </q-item>
-            <q-separator v-if="child.meta.separator" />
-          </div>
-        </q-expansion-item>
-      </div>
-      <div v-else :key="'p-' + index">
-        <q-item v-if="!menu.hidden" :active="false" :to="menu.path">
-          <q-item-section v-if="menu.meta.icon" avatar>
-            <q-icon :name="menu.meta.icon" />
-          </q-item-section>
-          <q-item-section>
-            {{ menu.meta.title }}
-          </q-item-section>
-        </q-item>
-        <q-separator v-if="menu.meta.separator" />
-      </div>
-    </template>
-
-    <q-separator />
-    <q-space class="q-mt-md" />
-    <template>
-      <q-input v-model="search" placeholder="search" style="min-width: 120px" dense clearable>
+  <q-list class="q-mt-sm">
+    <div class="q-pa-sm">
+      <q-input v-model="search" placeholder="search" dense clearable>
         <template v-slot:prepend>
           <q-btn round dense flat icon="search" @click="handleSearch" />
         </template>
       </q-input>
-    </template>
+    </div>
+
+    <div>
+      <q-expansion-item>
+        <template v-slot:header>
+          <q-list no-wrap>
+            <q-item>
+              <q-item-section>
+                <q-icon name="home" size="sm" />
+              </q-item-section>
+              <q-item-section>
+                父菜单
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </template>
+        <template v-slot:default>
+          <q-item v-ripple :to="{name: 'Home'}" clickable>
+            <q-item-section avatar>
+              <q-icon name="home" size="sm" left />
+            </q-item-section>
+            <q-item-section>
+              <div>首页</div>
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-expansion-item>
+
+      <q-expansion-item
+        group="group"
+        icon="more"
+        label="父菜单"
+        caption="子标题"
+      >
+        <q-expansion-item
+          :header-inset-level="1"
+          icon="mail"
+          label="无权限"
+          :to="{name: 'NotAuth'}"
+          exact
+          default-opened
+        />
+
+        <q-expansion-item
+          :header-inset-level="1"
+          :content-inset-level="1"
+          expand-separator
+          icon="schedule"
+          :to="{name: 'NotFound'}"
+          exact
+          label="404"
+        />
+
+      </q-expansion-item>
+      <q-expansion-item
+        :value="true"
+        group="group"
+        icon="more"
+        label="父菜单"
+        caption="子标题"
+      >
+        <q-expansion-item
+          :header-inset-level="1"
+          icon="mail"
+          label="无权限"
+          :to="{name: 'NotAuth'}"
+          default-opened
+        />
+
+        <q-expansion-item
+          :header-inset-level="1"
+          :content-inset-level="1"
+          expand-separator
+          icon="schedule"
+          :to="{name: 'NotFound'}"
+          label="404"
+        />
+
+      </q-expansion-item>
+
+      <q-item v-ripple :to="{name: 'Home'}" clickable>
+        <q-item-section avatar>
+          <q-icon name="home" size="sm" left />
+        </q-item-section>
+        <q-item-section>
+          <div>首页</div>
+        </q-item-section>
+      </q-item>
+    </div>
   </q-list>
 </template>
 
@@ -54,36 +104,9 @@ import { isEmpty, isNull } from '@/utils/validate'
 import { constantRoutes } from '@/router'
 
 export default {
-  name: 'VerticalMenu',
-  props: {
-    activeBgColor: {
-      type: String,
-      default: ''
-    },
-    menuIcon: {
-      type: Boolean,
-      default: false
-    },
-    menuVertical: {
-      type: Boolean,
-      default: false
-    },
-    inputRound: {
-      type: Boolean,
-      default: true
-    },
-    inputOutlined: {
-      type: Boolean,
-      default: true
-    },
-    inputBgColor: {
-      type: String,
-      default: ''
-    }
-  },
+  name: 'MenuLeft',
   data() {
     return {
-      menuActive: '',
       search: '',
       menuRoutes: []
     }
@@ -101,4 +124,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>
