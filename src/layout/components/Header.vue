@@ -7,7 +7,7 @@
       </q-avatar>
 
       <q-toolbar-title>Title</q-toolbar-title>
-      <MenuItem input-bg-color="white" />
+      <MenuItem input-bg-color="white" :menu-icon="true" />
       <q-space />
 
       <q-btn flat round dense icon="menu" @click="showSidebarRight" />
@@ -17,7 +17,7 @@
 
 <script>
 import bus from '@/utils/bus'
-import MenuItem from './MenuItem'
+import MenuItem from './MenuTop'
 
 export default {
   name: 'Header',

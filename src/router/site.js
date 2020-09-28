@@ -28,7 +28,7 @@ export default [
   {
     path: '/login',
     name: 'Login',
-    hidden: false,
+    hidden: true,
     meta: {
       title: '登录',
       requiresAuth: false
