@@ -7,7 +7,13 @@
       </q-avatar>
 
       <q-toolbar-title>Title</q-toolbar-title>
-      <MenuItem input-bg-color="white" :menu-icon="true" />
+      <q-navmenu-item
+        input-bg-color="white"
+        :show-search="true"
+        :menu-icon="false"
+        :search-callback="search"
+        :routes="routes()"
+      />
       <q-space />
 
       <q-btn flat round dense icon="menu" @click="showSidebarRight" />
@@ -17,12 +23,13 @@
 
 <script>
 import bus from '@/utils/bus'
-import MenuItem from './MenuTop'
+import QNavmenuItem from 'q-navmenu-item'
+import { constantRoutes } from '@/router'
 
 export default {
   name: 'Header',
   components: {
-    MenuItem
+    QNavmenuItem
   },
   data() {
     return {
@@ -41,6 +48,9 @@ export default {
     })
   },
   methods: {
+    search(str) {
+      console.log(str)
+    },
     showSidebarLeft() {
       this.sidebar.leftVisiable = !this.sidebar.leftVisiable
       bus.$emit('showSidebarLeft', this.sidebar.leftVisiable)
@@ -48,6 +58,9 @@ export default {
     showSidebarRight() {
       this.sidebar.rightVisiable = !this.sidebar.rightVisiable
       bus.$emit('showSidebarRight', this.sidebar.rightVisiable)
+    },
+    routes() {
+      return constantRoutes
     }
   }
 }

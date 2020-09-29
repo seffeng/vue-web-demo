@@ -24,6 +24,16 @@ export function isNull(val) {
 
 /**
  *
+ * @param {object} obj
+ * @param {*} attr
+ */
+export function hasProperty(obj, attr) {
+  // eslint-disable-next-line no-prototype-builtins
+  return typeof obj === 'object' && obj.hasOwnProperty(attr)
+}
+
+/**
+ *
  * @param {string} str
  */
 export function validPhone(str) {
