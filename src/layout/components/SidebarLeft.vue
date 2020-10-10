@@ -9,7 +9,7 @@
     @hide="handleHide"
   >
     <q-navmenu-item
-      position="left"
+      menu-type="item"
       :menu-top="false"
       :show-search="true"
       :input-dense="true"
