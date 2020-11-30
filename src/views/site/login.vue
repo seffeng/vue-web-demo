@@ -1,39 +1,61 @@
 <template>
-  <div class="q-pa-md">
-    <q-form
-      ref="loginForm"
-      class="q-gutter-md"
-    >
-      <q-input
-        v-model="loginForm.username"
-        label="用户名 *"
-        lazy-rules
-        :rules="loginRules.username"
-      />
+  <q-layout>
+    <q-page-container>
+      <q-page class="bg-blue-grey-9">
+        <div class="text-h5 text-center">
+          <div class="pt100 q-mb-lg">Login Form</div>
+          <div class="flex flex-center">
+            <q-card>
+              <q-card-section>
+                <q-form
+                  ref="loginForm"
+                  class="q-gutter-md"
+                >
+                  <q-input
+                    v-model="loginForm.username"
+                    lazy-rules
+                    outlined
+                    dense
+                    :rules="loginRules.username"
+                    :no-error-icon="true"
+                    placeholder="请输入账号"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="person" />
+                    </template>
+                  </q-input>
 
-      <q-input
-        v-model="loginForm.password"
-        filled
-        :dense="true"
-        :type="showPassword()"
-        lazy-rules
-        :rules="loginRules.password"
-        @keypress.native.enter="login"
-      >
-        <template v-slot:before>
-          <div>密码<span class="text-red-5">*</span></div>
-        </template>
-        <template v-slot:append>
-          <q-icon
-            :name="loginOptions.isShow ? 'visibility' : 'visibility_off'"
-            class="cursor-pointer"
-            @click="loginOptions.isShow = !loginOptions.isShow"
-          />
-        </template>
-      </q-input>
-      <q-btn color="primary" label="登录" :loading="loading" @click="login" />
-    </q-form>
-  </div>
+                  <q-input
+                    v-model="loginForm.password"
+                    outlined
+                    dense
+                    :type="showPassword()"
+                    lazy-rules
+                    :rules="loginRules.password"
+                    :no-error-icon="true"
+                    placeholder="请输入密码"
+                    @keypress.native.enter="login"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="lock" />
+                    </template>
+                    <template v-slot:append>
+                      <q-icon
+                        :name="loginOptions.isShow ? 'visibility' : 'visibility_off'"
+                        class="cursor-pointer"
+                        @click="loginOptions.isShow = !loginOptions.isShow"
+                      />
+                    </template>
+                  </q-input>
+                </q-form>
+                <q-btn color="primary" class="full-width q-mt-md" label="登录" :loading="loading" @click="login" />
+              </q-card-section>
+            </q-card>
+          </div>
+        </div>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
@@ -52,10 +74,13 @@ export default {
       loginRules: {
         username: [
           val => val && val.length > 0 || '请输入用户名！',
-          val => val && val.length < 16 || '请输入小于16位'
+          val => val && val.length >= 5 || '用户名 5~16 位！',
+          val => val && val.length <= 20 || '用户名 5~20 位！'
         ],
         password: [
-          val => val && val.length > 0 || '请输入密码！'
+          val => val && val.length > 0 || '请输入密码！',
+          val => val && val.length >= 8 || '用户名 8~24 位！',
+          val => val && val.length <= 24 || '用户名 8~24 位！'
         ]
       }
     }
@@ -82,4 +107,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.pt100 {
+  padding-top: 150px;
+}
 </style>
