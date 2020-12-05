@@ -7,7 +7,10 @@
     <SidebarRight />
 
     <q-page-container>
-      <router-view />
+      <div class="q-ma-md">
+        <Breadcrumb />
+        <router-view />
+      </div>
     </q-page-container>
 
     <Footer />
@@ -22,6 +25,7 @@ import Header from '@/layout/components/Header.vue'
 import Footer from '@/layout/components/Footer.vue'
 import SidebarLeft from '@/layout/components/SidebarLeft.vue'
 import SidebarRight from '@/layout/components/SidebarRight.vue'
+import Breadcrumb from '@/components/Breadcrumb.vue'
 
 export default {
   name: 'Layout',
@@ -30,7 +34,8 @@ export default {
     Footer,
     QBacktop,
     SidebarLeft,
-    SidebarRight
+    SidebarRight,
+    Breadcrumb
   }
 }
 </script>

@@ -1,11 +1,6 @@
 <template>
-  <q-page class="q-pa-md">
-    <q-breadcrumbs align="left">
-      <q-breadcrumbs-el label="首页" />
-      <q-breadcrumbs-el label="404" />
-    </q-breadcrumbs>
-    <q-separator />
-    <div class="q-pa-md">
+  <div class="row">
+    <div class="col">
       <p>404-页面未找到</p>
       <p>404-页面未找到</p>
       <p>404-页面未找到</p>
@@ -53,7 +48,7 @@
       <p>404-页面未找到</p>
       <p>404-页面未找到</p>
     </div>
-  </q-page>
+  </div>
 </template>
 
 <script>

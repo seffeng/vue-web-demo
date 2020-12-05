@@ -6,53 +6,105 @@ export default [
     name: 'TestIndex',
     component: Layout,
     meta: {
-      title: '测试父菜单',
-      subTitle: '子-标题',
+      title: '一级导航-1',
+      subTitle: '父菜单-子标题',
       icon: 'menu'
     },
-    redirect: 'test-a-1',
+    redirect: 'level-1-1',
     children: [
       {
-        path: 'test-a-1',
-        name: 'TestA1',
-        component: () => import('@/views/site/index'),
+        path: 'level-1-1',
+        name: 'Level1',
         meta: {
-          title: '测试-A-1',
-          tag: 'TestIndex',
+          title: '二级导航-1',
+          subTitle: '二级导航-子标题',
           icon: 'home',
           requiresAuth: false,
           allow: true
-        }
-      },
-      {
-        path: 'test-a-2',
-        name: 'TestA2',
-        meta: {
-          title: '测试-A2',
-          tag: 'TestIndex',
-          requiresAuth: false
         },
-        component: () => import('@/views/error/not-auth')
+        component: () => import('@/views/test/main'),
+        redirect: 'level-1-1-1',
+        children: [
+          {
+            path: 'level-1-1-1',
+            name: 'Level1-1-1',
+            meta: {
+              title: '三级导航-1',
+              icon: 'map',
+              requiresAuth: false,
+              allow: true
+            },
+            component: () => import('@/views/test/level-3')
+          },
+          {
+            path: 'level-1-1-2',
+            name: 'Level1-1-2',
+            meta: {
+              title: '三级导航-2',
+              icon: 'map',
+              requiresAuth: false,
+              allow: true,
+              separator: true
+            },
+            component: () => import('@/views/test/level-3')
+          },
+          {
+            path: 'https://www.wuhuawu.com',
+            name: 'Level1-1-3',
+            meta: {
+              title: '三级导航-外链',
+              icon: 'trending_up'
+            }
+          }
+        ]
       },
       {
-        path: 'test-a-3',
-        name: 'TestA3',
+        path: 'level-2',
+        name: 'Level2',
         meta: {
-          title: '测试-A3',
+          title: '二级导航-2',
+          requiresAuth: false,
+          separator: true
+        },
+        component: () => import('@/views/test/main'),
+        children: [
+          {
+            path: 'level-2-1-1',
+            name: 'Level2-1-1',
+            meta: {
+              title: '三级导航-3',
+              requiresAuth: false,
+              icon: 'menu'
+            },
+            component: () => import('@/views/test/level-3')
+          },
+          {
+            path: 'https://www.wuhuawu.com',
+            name: 'Level2-1-2',
+            meta: {
+              title: '三级导航-外链',
+              icon: 'trending_up'
+            }
+          }
+        ]
+      },
+      {
+        path: 'level-3',
+        name: 'Level3',
+        meta: {
+          title: '二级导航-3',
           icon: 'map',
-          tag: 'TestIndex',
           separator: true,
           requiresAuth: false
         },
-        component: () => import('@/views/error/not-found')
+        component: () => import('@/views/test/level-2')
       },
       {
         path: 'https://www.wuhuawu.com',
-        name: 'TestA4',
+        name: 'Level4',
         meta: {
-          title: '测试-A4-外链',
+          title: '二级导航-4-外链',
           icon: 'trending_up',
-          tag: 'TestIndex',
           requiresAuth: false
         }
       }
@@ -63,14 +115,14 @@ export default [
     component: Layout,
     children: [
       {
-        path: 'test-b-1',
-        name: 'TestB1',
+        path: 'level-5',
+        name: 'Level5',
         meta: {
-          title: '测试-B1',
+          title: '一级导航-2',
           separator: true,
           requiresAuth: false
         },
-        component: () => import('@/views/error/not-auth')
+        component: () => import('@/views/test/level-1')
       }
     ]
   },
@@ -78,51 +130,49 @@ export default [
     path: '/',
     component: Layout,
     meta: {
-      title: '测试-C'
+      title: '一级导航-3'
     },
-    name: 'TestC',
+    name: 'level6',
     children: [
       {
-        path: 'test-c-1',
-        name: 'TestC1',
+        path: 'level-6-1',
+        name: 'Level6-1',
         meta: {
-          title: '测试-C1',
-          tag: 'TestC',
+          title: '一级导航-3-二级-1',
           separator: true,
           icon: 'assignment',
           requiresAuth: false
         },
-        component: () => import('@/views/error/not-found')
+        component: () => import('@/views/test/level-2')
       },
       {
-        path: 'test-c-2',
-        name: 'TestC2',
+        path: 'level-6-2',
+        name: 'Level6-2',
         meta: {
-          title: '测试-C2',
-          tag: 'TestC',
-          separator: true,
+          title: '一级导航-3-二级-2',
           icon: 'assignment',
           requiresAuth: false
         },
-        component: () => import('@/views/error/not-auth')
+        component: () => import('@/views/test/level-2')
       }
     ]
   },
   {
     path: '/',
-    name: 'TestD',
-    redirect: 'test-d-1',
+    name: 'Level7',
+    redirect: 'level-7-1',
     meta: {
-      title: '测试-D'
+      title: '一级导航-3'
     },
     children: [
       {
         path: 'https://www.wuhuawu.com',
-        name: 'TestD1',
+        name: 'Level7-1',
         meta: {
-          title: '测试-D1-外链',
+          title: '一级导航三-外链',
           icon: 'mediation',
-          requiresAuth: false
+          requiresAuth: false,
+          separator: true
         }
       }
     ]

@@ -1,13 +1,9 @@
 <template>
-  <q-page class="q-pa-md">
-    <q-breadcrumbs align="left">
-      <q-breadcrumbs-el label="首页" />
-    </q-breadcrumbs>
-    <q-separator />
-    <div class="row">
+  <div class="row">
+    <div class="col">
       <HelloWorld />
     </div>
-  </q-page>
+  </div>
 </template>
 
 <script>

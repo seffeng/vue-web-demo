@@ -1,13 +1,12 @@
 <template>
-  <div class="row">
-    <div class="col">
-      无权限
-    </div>
+  <div>
+    三级导航
   </div>
 </template>
 
 <script>
 export default {
+
 }
 </script>
 

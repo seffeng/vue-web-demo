@@ -14,7 +14,7 @@ export default [
     children: [
       {
         path: 'site',
-        name: 'Home',
+        name: 'HomeIndex',
         component: () => import('@/views/site/index'),
         meta: {
           title: '首页',

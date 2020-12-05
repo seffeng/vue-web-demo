@@ -10,7 +10,6 @@
   >
     <q-navmenu-item
       menu-type="item"
-      :menu-top="false"
       :show-search="true"
       :input-dense="true"
       :input-outlined="false"
