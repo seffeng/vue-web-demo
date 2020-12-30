@@ -13,5 +13,13 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      var ua = window.navigator.userAgent
+      if (ua.indexOf('MSIE') > -1) {
+        var _html = '<p align="center" style="margin-top:200px">本站不支持IE11以下版本IE，为更好体验，请使用非IE浏览器！</p>';
+        _html += '<p align="center"><a href="https://www.google.cn/chrome/" target="_blank">Google Chrome</a></p>'
+        document.write(_html);
+      }
+    </script>
   </body>
 </html>
